@@ -24,7 +24,7 @@ export const StyledCardContainer = styled.div`
     
     .card_content {
         padding: 20px;
-        max-width: 180px;
+        width: 180px;
         box-shadow: 0 0 3px 0px #9c9c9c;
         display: flex;
         flex-direction: column;
