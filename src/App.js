@@ -1,26 +1,25 @@
 import './App.css';
 import {useEffect, useState} from 'react';
 import {CardContainer} from './components/Card';
-import {PageControl} from './components/PageControl';
 
 function App() {
   
   const [characters, setCharacters] = useState([]);
   
-  const [next, setNext] = useState('');
-  const [previous, setPrevious] = useState('');
+  const [next, setNext] = useState("https://rickandmortyapi.com/api/character/");
 
   useEffect(()=>{
-    fetch("https://rickandmortyapi.com/api/character/").then(res=> res.json()).then(data=> {
-      setNext(data.info.next);
-      setPrevious(data.info.prev);
-      setCharacters(data.results)
-    })
-  },[])
+    if(next !== null){
+      fetch(next).then(res=> res.json()).then(data=> {
+        setCharacters([...characters, ...data.results])
+        setNext(data.info.next);
+      })
+    } 
+  },[next])
   
   return (
     <div className="App">
-      <PageControl setPrevious={setPrevious} setNext={setNext} setCharacters={setCharacters} previous={previous} next={next}/>
+      <h1>RICK AND MORTY</h1>
       <CardContainer>{characters}</CardContainer>
     </div>
   );
